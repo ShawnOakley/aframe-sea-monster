@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- animation__waveone="property: rotation; delay: 75 dur: 2000; fill: forward; from: 0 0 0; to:  -30 0 0; autoplay: true; repeat: indefinite" -->
+<!-- animation__wavetwo="property: rotation; delay: 2075; dur: 2000; fill: forward; from: -30 0 0 ; to: 30 0 0 ;  autoplay: true; repeat: indefinite" -->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello, World! - A-Frame</title>
+    <meta name="description" content="Hello, World! - A-Frame">
+    <script type="application/javascript" src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script type="application/javascript" src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.min.js"></script>
+    <script type="application/javascript" src="https://rawgit.com/ngokevin/kframe/master/components/animation/dist/aframe-animation-component.min.js"></script>
+
+  </head>
+  <body>
+    <a-scene animation-timeline__1="timeline: #shiptl; loop: true">
+      <a-assets timeout="10000">
+        <a-asset-item id="seamonster-obj" src="./objects/seamonster.obj"></a-asset-item>
+        <a-asset-item id="seamonster-mtl" src="/objects/seamonster.mtl"></a-asset-item>
+        <a-asset-item id="ship-obj" src="./objects/ship.obj"></a-asset-item>
+        <a-asset-item id="ship-mtl" src="/objects/ship.mtl"></a-asset-item>
+        <img id="space" src="./images/space.jpg">
+        <a-timeline id="shiptl">
+          <a-timeline-group offset='100'>
+            <a-timeline-animation select="#ship1" name="positionone"></a-timeline-animation>
+            <a-timeline-animation select="#monster1" name="monsterpositionone"></a-timeline-animation>
+
+            <a-timeline-animation select="#ship1" name="positiontwo"></a-timeline-animation>
+          </a-timeline-group>
+        </a-timeline>
+        <a-mixin id="ship"
+          animation__positionone="property: position; dur: 5000; fill: forward; to: 0 0.5 -3; from: 10 0.5 -3; autoplay: true"
+          animation__positiontwo="property: position; delay: 5000; dur: 5000; fill: forward; to: -10 0.5 -3; from: 0 0.5 -3; autoplay: true"
+          position="10 0.5 -3"
+          obj-model="obj: #ship-obj; mtl: #ship-mtl"
+          scale="0.75 0.75 0.75"
+        ></a-mixin>
+        <a-mixin id="monster"
+          animation__monsterpositionone="property: position; dur: 5000; fill: forward; to: 0 0 -8; from: 0 -10 -8; autoplay: true"
+          scale="5 5 5"
+          position="0 0 -5"
+          rotation="50 180 0"
+          obj-model="obj: #seamonster-obj; mtl: #seamonster-mtl"
+          scale="4 4 4"
+        ></a-mixin>
+      </a-assets>
+      <a-sky src="#space"></a-sky>
+      <a-entity
+        id="ship1"
+        mixin="ship"
+      >
+        <a-animation
+          attribute="rotation"
+          dur="750"
+          from="20 5 -5"
+          to="-20 -5 5"
+          autoplay="true"
+          repeat="indefinite"
+          direction="alternate-reverse"
+          easing="ease-in-out-cubic"
+        >
+        <a-animation>
+      </a-entity>
+      <a-entity
+        id="seamonster1"
+        mixin="monster"
+      >
+      </a-entity>
+      <a-ocean  width="50" depth="50" density="50" speed="20">
+      </a-ocean>
+  </a-scene>
+  </body>
+  <script>
+  </script>
+</html>
